@@ -24,7 +24,7 @@ std::thread **create_threads(int count) {
 std::vector<int> *join_thread_n_get_sizes(std::thread **thrd) {
 	int size;
 	std::vector<int> *v = new std::vector<int>;	
-	for(int i=0;thrd[i]!=NULL;i++) {(*(thrd[i])).join();size=i;(*v)[i] = size;}
+	for(int i=0;thrd[i]!=NULL;i++) {(*(thrd[i])).join();size=i;(*v).push_back(size);}
 	return v;
 
 }
@@ -35,7 +35,7 @@ int main()
     std::thread t2(AccumulateRange, std::ref(partial_sums[1]), step, no_of_threads * step);
     std::thread t3;
 
-    std::thread **thrd = create_threads(2);
+    std::thread **thrd = create_threads(3);
     t1.join();
     t2.join();
     std::vector<int> *vec = join_thread_n_get_sizes(thrd);
